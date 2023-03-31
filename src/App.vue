@@ -1,6 +1,6 @@
 <template>
   <TheHeader @searchFilm="getFilmFromApi"/>
-  <main class="mt-3">
+  <main class="my-3">
     <FilmList />
   </main>
 </template>

@@ -1,7 +1,10 @@
 <template>
     <div v-if="storage.filmList.length != 0" class="container d-flex flex-wrap m-auto">
         <CardFilm class="card-container" v-for="film in storage.filmList"
-         :filmName="film.original_title"
+         :originalFilmName="film.original_title"
+         :translatedFilmName="film.title"
+         :languageFilm="film.original_language"
+         :voteAvarage="film.vote_average"
          />
     </div>
     <h2 v-else class="text-center">Effettua la tua prima ricerca</h2>
