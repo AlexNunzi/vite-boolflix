@@ -18,7 +18,7 @@ export default{
         originalFilmName: String,
         translatedFilmName: String,
         languageFilm: String,
-        voteAvarage: String,
+        voteAvarage: Number,
 
     }
 }
