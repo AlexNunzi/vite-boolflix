@@ -2,11 +2,11 @@
     <div class="card p-3">
         <ul class="list-style-none">
             <li>
-                <h4 class="my-3">Il titolo tradotto è: {{ translatedFilmName }}</h4>
-                <h3 class="my-3">Il titolo originale è: {{ originalFilmName }}</h3>
+                <h4 class="my-3">Il titolo tradotto è: {{ translatedSerieName }}</h4>
+                <h3 class="my-3">Il titolo originale è: {{ originalSerieName }}</h3>
                 <h5 class="my-3">Lingua originale: 
-                    <img class="flag" v-if="storage.flagImg[languageFilm]" :src="storage.flagImg[languageFilm]">
-                    <span v-else>{{ languageFilm }}</span>
+                    <img class="flag" v-if="storage.flagImg[languageSerie]" :src="storage.flagImg[languageSerie]">
+                    <span v-else>{{ languageSerie }}</span>
                 </h5>
                 <h5 class="my-3">Il voto medio ricevuto è: {{ voteAvarage }}</h5>
             </li>
@@ -17,16 +17,16 @@
 <script>
 import { storage } from '../storage';
 export default{
-    name: 'CardFilm',
+    name: 'CardSerie',
     data() {
         return {
             storage,
         }
     },
     props: {
-        originalFilmName: String,
-        translatedFilmName: String,
-        languageFilm: String,
+        originalSerieName: String,
+        translatedSerieName: String,
+        languageSerie: String,
         voteAvarage: Number,
     }
 }

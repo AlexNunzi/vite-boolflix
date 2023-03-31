@@ -10,6 +10,10 @@
     max-width: 1170px;
 }
 
+.card-container{
+    width: calc(100% / 5);
+}
+
 .d-flex{
     display: flex;
 }
