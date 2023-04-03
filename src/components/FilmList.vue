@@ -7,6 +7,7 @@
             :translatedFilmName="film.title"
             :languageFilm="film.original_language"
             :voteAvarage="film.vote_average"
+            :coverFilm="film.poster_path"
             />
         </div>
         <h3 v-else>Non sono stati trovati film che contengano "{{ storage.searchInput }}" nel proprio titolo</h3>

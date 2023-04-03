@@ -7,6 +7,7 @@
             :translatedSerieName="serie.name"
             :languageSerie="serie.original_language"
             :voteAvarage="serie.vote_average"
+            :coverSerie="serie.poster_path"
             />
         </div>
         <h3 v-else>Non sono state trovate serie TV che contengano "{{ storage.searchInput }}" nel proprio titolo</h3>
