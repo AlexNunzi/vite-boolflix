@@ -1,9 +1,11 @@
 <template>
-    <div v-for="star in stars" class="stella">
-        <div class="star-solid-wrap" :style="star">
-            <font-awesome-icon icon="fa-solid fa-star" class="solid" />
+    <div>
+        <div v-for="star in stars" class="stella">
+            <div class="star-solid-wrap" :style="star">
+                <font-awesome-icon icon="fa-solid fa-star" class="solid" />
+            </div>
+            <font-awesome-icon icon="fa-regular fa-star" class="regular" />
         </div>
-        <font-awesome-icon icon="fa-regular fa-star" class="regular" />
     </div>
 </template>
 

@@ -3,6 +3,7 @@ import { reactive } from "vue";
 export const storage = reactive (
     {
         searchInput: '',
+        lastSearch: '',
         filmList: [],
         seriesList: [],
         flagImg: {
@@ -12,6 +13,8 @@ export const storage = reactive (
             sl: 'sl_flag.png',
             fr: 'fr_flag.png',
         },
-        uiMessage: 'Effettua una ricerca'
+        uiMessage: 'Effettua una ricerca',
+        loadingFilm: false,
+        loadingTvShow: false
     }
 )

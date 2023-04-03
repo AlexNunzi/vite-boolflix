@@ -53,8 +53,20 @@
     width: calc(100% / 5);
 }
 
+.d-inline-block{
+    display: inline-block;
+}
+
+.d-block{
+    display: block;
+}
+
 .d-flex{
     display: flex;
+}
+
+.flex-column{
+    flex-direction: column;
 }
 
 .flex-wrap{
@@ -102,12 +114,24 @@
     margin-top: 1rem;
 }
 
+.ps-5{
+    padding-left: 3rem;
+}
+
 .p-3{
     padding: 1rem;
 }
 
+.p-4{
+    padding: 2rem;
+}
+
 .list-style-none{
     list-style: none;
+}
+
+.rounded-circle{
+    border-radius: 100%;
 }
 
 body{

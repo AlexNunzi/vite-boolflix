@@ -3,7 +3,7 @@
         <div class="container d-flex justify-content-between align-center h-100 m-auto">
             <h1>BOOLFLIX</h1>
             <div>
-                <input class="me-3" type="text" v-model="storage.searchInput">
+                <input class="me-3" type="text" v-model="storage.searchInput" @keyup.enter="$emit('searchFilm')">
                 <button @click="$emit('searchFilm')">Cerca</button>
             </div>
         </div>
