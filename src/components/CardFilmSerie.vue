@@ -1,5 +1,6 @@
 <template>
     <li class="card px-1 py-3">
+        <a href="#">
             <div class="film-content h-100 position-relative">
                 <div class="img-film m-auto">
                     <img v-if="filmOrTv.poster_path != null" class="card-img" :src="`https://image.tmdb.org/t/p/w342/${filmOrTv.poster_path}`" alt="Film cover image">
@@ -46,6 +47,7 @@
                 </ul>
 
             </div>
+        </a>
     </li>
 </template>
 

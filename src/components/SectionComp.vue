@@ -1,6 +1,6 @@
 <template>
       <section>
-        <h2 class="mt-3">{{sectionTitle}}:</h2>
+        <h2 class="mt-3">{{sectionTitle}} {{ sectionSubTitle }}:</h2>
         <loadingComp v-if="loadingContent" />
         <div v-else>
           <ul v-if="contentList.length > 0" class="bottom-line list-style-none d-flex overflow-x-auto overflow-y-hidden m-auto p-3">
@@ -9,7 +9,7 @@
             :load="loadingContent"
             />
           </ul>
-          <h3 v-else>Non è stato possibile trovare {{ sectionTitle.toLowerCase() }} che contengono "{{ storage.lastSearch }}" nel proprio titolo</h3>
+          <h3 v-else class="bottom-line pb-3">Non è stato possibile trovare {{ sectionTitle.toLowerCase() }} che contengono "{{ storage.lastSearch }}" nel proprio titolo</h3>
         </div>
       </section>
 </template>
@@ -31,6 +31,7 @@ export default {
     },
     props: {
         sectionTitle: String,
+        sectionSubTitle: String,
         loadingContent: Boolean,
         contentList: Object
     }

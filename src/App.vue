@@ -2,7 +2,7 @@
   <TheHeader @searchFilm="search"/>
   <main class="my-3 container m-auto">
 
-    <h2 v-if="foundSomething() && !(storage.loadingFilm || storage.loadingTvShow)" class="text-center">{{ this.storage.uiMessage }}</h2>
+    <h2 v-if="foundSomething() && !(storage.loadingFilm || storage.loadingTvShow)" class="text-center py-5">{{ this.storage.uiMessage }}</h2>
 
 <!-- FILM/TV SHOW SECTION -->
     <div v-else>
@@ -20,8 +20,25 @@
       :loadingContent="storage.loadingTvShow"
       :contentList="storage.seriesList"
        />
+      </div>
 
-    </div>
+    <!-- TRENDING FILM OF WEEK -->
+    <SectionComp 
+      :sectionTitle=" 'Film' "
+      :sectionSubTitle=" 'consigliati' "
+      :loadingContent="storage.loadingRecommFilmList"
+      :contentList="storage.recommendedFilmList"
+       />
+
+    <!-- TRENDING TV SHOW OF WEEK -->
+    <SectionComp 
+      :sectionTitle=" 'Serie TV' "
+      :sectionSubTitle=" 'consigliate' "
+      :loadingContent="storage.loadingRecommSeriesList"
+      :contentList="storage.recommendedSeriesList"
+       />
+
+       
   </main>
 </template>
 
@@ -69,7 +86,6 @@ export default{
       axios.get(this.urlApi('/search/movie', 'language=it-IT', `query=${this.storage.lastSearch}`))
       .then(response => {
         this.storage.filmList = response.data.results;
-        this.storage.castFilm = [];
         this.storage.filmList.forEach((el, index) => this.getCastFromApi(`/movie/${el.id}/credits`,index));
         this.storage.loadingFilm = false;
       }).catch(error => {
@@ -84,25 +100,64 @@ export default{
       axios.get(this.urlApi('/search/tv', 'language=it-IT', `query=${this.storage.lastSearch}`))
       .then(response => {
         this.storage.seriesList = response.data.results;
-        this.storage.castSeries = [];
-        this.storage.seriesList.forEach((el, index) => this.getCastFromApi(`/tv/${el.id}/credits`, index));
+        this.storage.seriesList.forEach((el, index) => this.getCastFromApi(`/tv/${el.id}/credits`, index, 'search'));
         this.storage.loadingTvShow = false;
       }).catch(error => {
         storage.seriesList = [];
         this.storage.loadingTvShow = false;
       })
     },
-    getCastFromApi(typeId, index) {
+    getRecommFilmFromApi() {
+      this.storage.recommendedFilmList = [];
+      this.storage.loadingRecommFilmList = true;
+      axios.get(this.urlApi('/trending/movie/week', 'language=it-IT'))
+      .then(response => {
+        this.storage.recommendedFilmList = response.data.results;
+        console.log(this.storage.recommendedFilmList);
+        this.storage.recommendedFilmList.forEach((el, index) => this.getCastFromApi(`/movie/${el.id}/credits`, index, 'init'));
+        this.storage.loadingRecommFilmList = false;
+      }).catch(error => {
+        storage.recommendedFilmList = [];
+        this.storage.loadingRecommFilmList = false;
+      })
+    },
+    getRecommSeriesFromApi() {
+      this.storage.recommendedSeriesList = [];
+      this.storage.loadingRecommSeriesList = true;
+      axios.get(this.urlApi('/trending/tv/week', 'language=it-IT'))
+      .then(response => {
+        this.storage.recommendedSeriesList = response.data.results;
+        console.log(this.storage.recommendedSeriesList);
+        this.storage.recommendedSeriesList.forEach((el, index) => this.getCastFromApi(`/tv/${el.id}/credits`, index, 'init'));
+        this.storage.loadingRecommSeriesList = false;
+      }).catch(error => {
+        storage.recommendedSeriesList = [];
+        this.storage.loadingRecommSeriesList = false;
+      })
+    },
+    getCastFromApi(typeId, index, searchOrInit) {
       axios.get(this.urlApi(typeId))
       .then (response => {
         let credits = response.data;
         if(credits.cast.length > 5){
           credits.cast = credits.cast.slice(0, 5);
         }
-        if(typeId.split('/')[1] == 'movie'){
-          this.storage.filmList[index].castInfo = credits;
-        } else {
-          this.storage.seriesList[index].castInfo = credits;
+        if(searchOrInit == 'init'){
+
+          if(typeId.split('/')[1] == 'movie'){
+            this.storage.recommendedFilmList[index].castInfo = credits;
+          } else {
+            this.storage.recommendedSeriesList[index].castInfo = credits;
+          }
+
+        } else if(searchOrInit == 'search'){
+
+          if(typeId.split('/')[1] == 'movie'){
+            this.storage.filmList[index].castInfo = credits;
+          } else {
+            this.storage.seriesList[index].castInfo = credits;
+          }
+
         }
       }).catch(error => {
         console.log('Errore');
@@ -121,12 +176,14 @@ export default{
       })
     },
     foundSomething(){
-      return (storage.filmList.length == 0 && storage.seriesList.length == 0);
+      return (this.storage.filmList.length == 0 && this.storage.seriesList.length == 0);
     }
   },
   mounted() {
     this.getGenresList('movie');
     this.getGenresList('tv');
+    this.getRecommSeriesFromApi();
+    this.getRecommFilmFromApi();
   }
 }
 </script>

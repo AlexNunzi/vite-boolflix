@@ -7,6 +7,8 @@ export const storage = reactive (
         filmList: [],
         seriesList: [],
         genresList: [],
+        recommendedFilmList: [],
+        recommendedSeriesList: [],
         flagImg: {
             it: 'it_flag.png',
             en: 'en_flag.png',
@@ -14,8 +16,10 @@ export const storage = reactive (
             sl: 'sl_flag.png',
             fr: 'fr_flag.png',
         },
-        uiMessage: 'Effettua una ricerca',
+        uiMessage: 'Qui sotto trovi i film e le serie tv consigliate della settimana, altrimenti effettua una ricerca!',
         loadingFilm: false,
-        loadingTvShow: false
+        loadingTvShow: false,
+        loadingRecommFilmList: false,
+        loadingRecommSeriesList: false
     }
 )
