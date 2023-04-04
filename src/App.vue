@@ -46,15 +46,15 @@ export default{
     SectionComp
   },
   methods: {
-    urlApi(type, ...parameters){
-      let urlApi = 'https://api.themoviedb.org/3/search';
-      let api_key = 'cf09febcc95a3fe86961147afc012909';
-      let par = '';
-      if(parameters.length > 0){
-        parameters.forEach(param => par+=`&${param}`);
-      }
-      return `${urlApi}/${type}?api_key=${api_key}${par}`;
-    },
+    urlApi(type, ...parameters) {
+        let urlApi = 'https://api.themoviedb.org/3';
+        let api_key = 'cf09febcc95a3fe86961147afc012909';
+        let par = '';
+        if(parameters.length > 0){
+          parameters.forEach(param => par+=`&${param}`);
+        }
+        return `${urlApi}${type}?api_key=${api_key}${par}`;
+      },
     search() {
       this.storage.lastSearch = this.storage.searchInput;
       this.storage.searchInput = '';
@@ -66,10 +66,12 @@ export default{
       this.storage.filmList = [];
       this.storage.loadingFilm = true;
       // https://api.themoviedb.org/3/search/movie?api_key=cf09febcc95a3fe86961147afc012909&language=it-IT&query=prova
-      axios.get(this.urlApi('movie', 'language=it-IT', `query=${this.storage.lastSearch}`))
+      axios.get(this.urlApi('/search/movie', 'language=it-IT', `query=${this.storage.lastSearch}`))
       .then(response => {
-        this.storage.loadingFilm = false;
         this.storage.filmList = response.data.results;
+        this.storage.castFilm = [];
+        this.storage.filmList.forEach((el, index) => this.getCastFromApi(`/movie/${el.id}/credits`,index));
+        this.storage.loadingFilm = false;
       }).catch(error => {
         this.storage.filmList = [];
         this.storage.loadingFilm = false;
@@ -78,14 +80,33 @@ export default{
     getSeriesFromApi() {
       this.storage.seriesList = [];
       this.storage.loadingTvShow = true;
-      // https://api.themoviedb.org/3//search/tv?api_key=cf09febcc95a3fe86961147afc012909&language=it-IT&query=prova
-      axios.get(this.urlApi('tv', 'language=it-IT', `query=${this.storage.lastSearch}`))
+      // https://api.themoviedb.org/3/search/tv?api_key=cf09febcc95a3fe86961147afc012909&language=it-IT&query=prova
+      axios.get(this.urlApi('/search/tv', 'language=it-IT', `query=${this.storage.lastSearch}`))
       .then(response => {
         this.storage.seriesList = response.data.results;
+        this.storage.castSeries = [];
+        this.storage.seriesList.forEach((el, index) => this.getCastFromApi(`/tv/${el.id}/credits`, index));
         this.storage.loadingTvShow = false;
       }).catch(error => {
         storage.seriesList = [];
         this.storage.loadingTvShow = false;
+      })
+    },
+    getCastFromApi(typeId, index) {
+      axios.get(this.urlApi(typeId))
+      .then (response => {
+        let credits = response.data;
+        if(credits.cast.length > 5){
+          credits.cast = credits.cast.slice(0, 5);
+        }
+        if(typeId.split('/')[1] == 'movie'){
+          this.storage.filmList[index].castInfo = credits;
+        } else {
+          this.storage.seriesList[index].castInfo = credits;
+        }
+      }).catch(error => {
+        console.log('Errore')
+        return [];
       })
     },
     foundSomething(){

@@ -9,27 +9,35 @@
                     </div>
                 </div>
                 
-                <ul class="info-film list-style-none p-2 overflow-y-auto">
+                <ul class="info-film list-style-none p-2 overflow-y-auto text-shadow">
                     <li>
-                        <h5 class="my-3">Titolo: <span class="fw-normal">{{ filmOrTv.title ? filmOrTv.title : filmOrTv.name }}</span></h5>
+                        <h5 class="my-2">Titolo: <span class="fw-normal">{{ filmOrTv.title ? filmOrTv.title : filmOrTv.name }}</span></h5>
                     </li>
                     <li>
-                        <h5 class="my-3">Titolo Originale: <span class="fw-normal">{{ filmOrTv.original_title ? filmOrTv.original_title : filmOrTv.name }}</span></h5>
+                        <h5 class="my-2">Titolo Originale: <span class="fw-normal">{{ filmOrTv.original_title ? filmOrTv.original_title : filmOrTv.name }}</span></h5>
                     </li>
                     <li>
-                        <h5>Valutazione</h5>
+                        <h5>Voti ricevuti - {{ filmOrTv.vote_count }}</h5>
                         <RatingStars :voteStars="filmOrTv.vote_average / 2" />
                     </li>
                     <li>
-                        <h5 class="my-3">Lingua originale: 
+                        <h5 class="my-2">Lingua originale: 
                             <img class="flag" v-if="storage.flagImg[filmOrTv.original_language]" :src="storage.flagImg[filmOrTv.original_language]">
                             <span v-else>{{ filmOrTv.original_language }}</span>
                         </h5>
                     </li>
                     <li>
-                        <div class="overflow-y-auto">
+                        <div class="my-2 overflow-y-auto">
                             <h5>Trama: <span class="fw-light"> {{ filmOrTv.overview }} </span></h5>
                         </div>
+                    </li>
+                    <li>
+                        <h5>Cast</h5>
+                        <ul v-if="filmOrTv.castInfo" class="list-style-none">
+                            <li v-for="char in filmOrTv.castInfo.cast" class="fs-small"> 
+                                {{ char.name }} 
+                            </li>
+                        </ul>
                     </li>
                 </ul>
 

@@ -67,6 +67,11 @@
     margin: auto;
 }
 
+.my-2{
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
 .my-3{
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -104,6 +109,14 @@
 
 .p-4{
     padding: 2rem;
+}
+
+.text-shadow{
+    text-shadow: 1px 1px #000000;
+}
+
+.fs-small{
+    font-size: 0.75rem;
 }
 
 .fw-normal{

@@ -1,9 +1,9 @@
 <template>
       <section>
-        <h2 class="my-3">{{sectionTitle}}:</h2>
+        <h2 class="mt-3">{{sectionTitle}}:</h2>
         <loadingComp v-if="loadingContent" />
         <div v-else>
-          <ul v-if="contentList.length > 0" :class="classShadow" class="list-style-none d-flex overflow-x-auto overflow-y-hidden m-auto p-3">
+          <ul v-if="contentList.length > 0" class="bottom-line list-style-none d-flex overflow-x-auto overflow-y-hidden m-auto p-3">
             <CardFilmSerie class="card-container" v-for="film in contentList"
             :filmOrTv="film"
             :load="loadingContent"
@@ -38,5 +38,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+@use '../styles/variables' as *;
+.bottom-line{
+    border-bottom: 2px solid lighten($bg-body, 20);
+}
 </style>
