@@ -73,11 +73,15 @@ export default{
         return `${urlApi}${type}?api_key=${api_key}${par}`;
       },
     search() {
-      this.storage.lastSearch = this.storage.searchInput;
-      this.storage.searchInput = '';
-      this.storage.uiMessage = 'Non è stato trovato nessun risultato, prova a cercare un altro titolo';
-      this.getFilmFromApi();
-      this.getSeriesFromApi();
+      if(this.storage.searchInput.trim() != ''){
+        this.storage.lastSearch = this.storage.searchInput;
+        this.storage.searchInput = '';
+        this.storage.uiMessage = 'Non è stato trovato nessun risultato, prova a cercare un altro titolo';
+        this.getFilmFromApi();
+        this.getSeriesFromApi();
+      } else {
+        alert('Scrivi qualcosa nel campo di input per poter effettuare una ricerca!');
+      }
     },
     getFilmFromApi() {
       this.storage.filmList = [];
