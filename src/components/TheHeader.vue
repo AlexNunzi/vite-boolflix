@@ -26,6 +26,11 @@ export default{
 @use '../styles/variables' as *;
 
 header { 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
     background-color: $bg-primary;
     height: 5rem;
 

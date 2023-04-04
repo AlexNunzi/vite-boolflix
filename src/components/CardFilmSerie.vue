@@ -10,33 +10,37 @@
                 </div>
                 
                 <ul class="info-film list-style-none p-2 overflow-y-auto text-shadow">
-                    <li>
-                        <h5 class="my-2">Titolo: <span class="fw-normal">{{ filmOrTv.title ? filmOrTv.title : filmOrTv.name }}</span></h5>
+                    <li class="my-2">
+                        <h5>Titolo: <span class="fw-normal">{{ filmOrTv.title ? filmOrTv.title : filmOrTv.name }}</span></h5>
                     </li>
-                    <li>
-                        <h5 class="my-2">Titolo Originale: <span class="fw-normal">{{ filmOrTv.original_title ? filmOrTv.original_title : filmOrTv.name }}</span></h5>
+                    <li class="my-2">
+                        <h5>Titolo Originale: <span class="fw-normal">{{ filmOrTv.original_title ? filmOrTv.original_title : filmOrTv.name }}</span></h5>
                     </li>
-                    <li>
+                    <li class="my-2">
                         <h5>Voti ricevuti - {{ filmOrTv.vote_count }}</h5>
                         <RatingStars :voteStars="filmOrTv.vote_average / 2" />
                     </li>
-                    <li>
-                        <h5 class="my-2">Lingua originale: 
+                    <li class="my-2">
+                        <h5>Lingua originale: 
                             <img class="flag" v-if="storage.flagImg[filmOrTv.original_language]" :src="storage.flagImg[filmOrTv.original_language]">
                             <span v-else>{{ filmOrTv.original_language }}</span>
                         </h5>
                     </li>
-                    <li>
-                        <div class="my-2 overflow-y-auto">
+                    <li class="my-2">
                             <h5>Trama: <span class="fw-light"> {{ filmOrTv.overview }} </span></h5>
-                        </div>
                     </li>
-                    <li>
+                    <li class="my-2">
                         <h5>Cast</h5>
                         <ul v-if="filmOrTv.castInfo" class="list-style-none">
                             <li v-for="char in filmOrTv.castInfo.cast" class="fs-small"> 
                                 {{ char.name }} 
                             </li>
+                        </ul>
+                    </li>
+                    <li class="my-2">
+                        <h5>Generi associati</h5>
+                        <ul class="list-style-none fs-small">
+                            <li v-for="genre in filmOrTv.genre_ids"> {{ findGenre(genre) }} </li>
                         </ul>
                     </li>
                 </ul>
@@ -60,6 +64,11 @@ export default{
     },
     components:{
         RatingStars,
+    },
+    methods:{
+        findGenre(id){
+            return this.storage.genresList.filter(genre => genre.id == id)[0].name;
+        }
     }
 }
 </script>

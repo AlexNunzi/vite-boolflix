@@ -105,13 +105,28 @@ export default{
           this.storage.seriesList[index].castInfo = credits;
         }
       }).catch(error => {
-        console.log('Errore')
-        return [];
+        console.log('Errore');
+      })
+    },
+    getGenresList(type) {
+      axios.get(this.urlApi(`/genre/${type}/list`, 'language=it-IT'))
+      .then (response => {
+        response.data.genres.forEach(genre => {
+          if(!this.storage.genresList.find(element => element.id == genre.id)){
+            this.storage.genresList.push(genre);
+          }
+        });
+      }).catch(error => {
+        console.log('Errore');
       })
     },
     foundSomething(){
       return (storage.filmList.length == 0 && storage.seriesList.length == 0);
     }
+  },
+  mounted() {
+    this.getGenresList('movie');
+    this.getGenresList('tv');
   }
 }
 </script>

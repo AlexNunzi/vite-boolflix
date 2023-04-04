@@ -6,6 +6,7 @@ export const storage = reactive (
         lastSearch: '',
         filmList: [],
         seriesList: [],
+        genresList: [],
         flagImg: {
             it: 'it_flag.png',
             en: 'en_flag.png',
