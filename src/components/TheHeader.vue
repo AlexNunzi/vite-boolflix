@@ -26,7 +26,7 @@ export default{
 @use '../styles/variables' as *;
 
 header { 
-    background-color: $bg-header;
+    background-color: $bg-primary;
     height: 5rem;
 
     & h1 {

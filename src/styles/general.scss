@@ -1,56 +1,14 @@
 @use './variables' as *;
 
-.stella{
-    position: relative;
-    display: inline-block;
-    font-size: $star-fs;
-    height: $star-fs;
-    width: calc($star-fs * 1.125);
-    z-index: 1;    
-}
-
-.stella .solid {
-    // dimensione del font .stella / 1.28 perchè abbia una dimensione leggermente inferiore
-    // al font-awesome della stella vuota per simularne lo riempimento conservando il bordo
-    // della stella vuota anche in caso di completo riempimento
-    font-size: calc($star-fs / 1.28); 
-    color: yellow;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 5;
-  }
-
-.star-solid-wrap{
-    height: 100%;
-    position: absolute;
-    // calc di top e left che serve a centrare i due font sovrapposti
-    top: calc(($star-fs - ($star-fs/1.325)) / 2);
-    left: calc(($star-fs - ($star-fs/1.325)) /2);
-    overflow: hidden;
-    z-index: 4;
-}
-
-.stella .regular{
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 3;
-}
-
-
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: sans-serif;
 }
 
 .container{
     max-width: 1170px;
-}
-
-.card-container{
-    width: calc(100% / 5);
 }
 
 .d-inline-block{
@@ -59,6 +17,10 @@
 
 .d-block{
     display: block;
+}
+
+.d-none{
+    display: none;
 }
 
 .d-flex{
@@ -71,6 +33,10 @@
 
 .flex-wrap{
     flex-wrap: wrap;
+}
+
+.flex-shink-0{
+    flex-shrink: 0;
 }
 
 .justify-content-center{
@@ -118,12 +84,34 @@
     padding-left: 3rem;
 }
 
+.px-1{
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+}
+
+.py-3{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.p-2{
+    padding: 0.5rem;
+}
+
 .p-3{
     padding: 1rem;
 }
 
 .p-4{
     padding: 2rem;
+}
+
+.fw-normal{
+    font-weight:normal
+}
+
+.fw-light{
+    font-weight:lighter;
 }
 
 .list-style-none{
@@ -134,6 +122,24 @@
     border-radius: 100%;
 }
 
+.overflow-x-auto{
+    overflow-x: auto;
+}
+
+.overflow-y-auto{
+    overflow-y: auto;
+}
+
 body{
     background-color: $bg-body;
+}
+
+.label{
+    border-radius: 1rem;
+    background-color: $bg-primary;
+    color: $text-label;
+}
+
+.position-relative{
+    position: relative;
 }

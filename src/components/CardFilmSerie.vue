@@ -1,14 +1,24 @@
 <template>
-    <div class="card p-3">
-            <li class="d-flex flex-column justify-content-between h-100">
-                <img v-if="filmOrTv.poster_path != null" class="w-100" :src="`https://image.tmdb.org/t/p/w342/${filmOrTv.poster_path}`" alt="Film cover image">
-                <img v-else src="/img_miss.png" alt="Image not available" class="w-100">
-                <ul class="list-style-none">
+    <li class="card px-1 py-3">
+            <div class="film-content h-100 position-relative">
+                <div class="img-film m-auto">
+                    <img v-if="filmOrTv.poster_path != null" class="card-img" :src="`https://image.tmdb.org/t/p/w342/${filmOrTv.poster_path}`" alt="Film cover image">
+                    <div v-else class="position-relative">
+                        <img src="/img_miss.png" alt="Image not available" class="card-img">
+                        <h4 class="missingImg label p-3"> {{ filmOrTv.title ? filmOrTv.title : filmOrTv.name }} </h4>
+                    </div>
+                </div>
+                
+                <ul class="info-film list-style-none p-2 overflow-y-auto">
                     <li>
-                        <h4 class="my-3">Il titolo tradotto è: {{ filmOrTv.title ? filmOrTv.title : filmOrTv.name }}</h4>
+                        <h5 class="my-3">Titolo: <span class="fw-normal">{{ filmOrTv.title ? filmOrTv.title : filmOrTv.name }}</span></h5>
                     </li>
                     <li>
-                        <h3 class="my-3">Il titolo originale è: {{ filmOrTv.original_title ? filmOrTv.original_title : filmOrTv.name }}</h3>
+                        <h5 class="my-3">Titolo Originale: <span class="fw-normal">{{ filmOrTv.original_title ? filmOrTv.original_title : filmOrTv.name }}</span></h5>
+                    </li>
+                    <li>
+                        <h5>Valutazione</h5>
+                        <RatingStars :voteStars="filmOrTv.vote_average / 2" />
                     </li>
                     <li>
                         <h5 class="my-3">Lingua originale: 
@@ -17,13 +27,14 @@
                         </h5>
                     </li>
                     <li>
-                        <h5 class="my-3">Il voto medio ricevuto è: {{ filmOrTv.vote_average / 2 }}</h5>
-                        <RatingStars :voteStars="filmOrTv.vote_average / 2" />
+                        <div class="overflow-y-auto">
+                            <h5>Trama: <span class="fw-light"> {{ filmOrTv.overview }} </span></h5>
+                        </div>
                     </li>
                 </ul>
 
-            </li>
-    </div>
+            </div>
+    </li>
 </template>
 
 <script>
@@ -46,12 +57,52 @@ export default{
 </script>
 
 <style scoped lang="scss">
-.card{
-    border: 2px solid gray;
+@use '../styles/variables' as *;
+.card-img{
+    position: relative;
+    z-index: 10;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+}
+.flag{
+    width: 1rem;
 }
 
-.flag{
-    width: 2rem;
+.missingImg{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
+
+.info-film{
+    color: $text-info;
+    opacity: 0;
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.film-content:hover{
+    transform: scale(1.15);
+    transition: all 1s;
+    z-index: 100;
+    background-color: $bg-film-content;
+
+    & .img-film{
+        transition: all 1s;
+        opacity: 0.25;
+    }
+
+    & .info-film{
+        transition: all 1s;
+        opacity: 1;
+    }
+}
+
 
 </style>

@@ -6,11 +6,11 @@
 
 <script>
 export default {
-    name: 'loadingComp'
-}
+    name: 'LoadingComp',
+    }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @use '../styles/variables' as *;
 
 .load{
