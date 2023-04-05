@@ -68,7 +68,7 @@ export default {
     // al font-awesome della stella vuota per simularne lo riempimento conservando il bordo
     // della stella vuota anche in caso di completo riempimento
     font-size: calc($star-fs / 1.28); 
-    color: yellow;
+    color: $bg-star-rating;
     position: absolute;
     top: 0;
     left: 0;

@@ -1,5 +1,5 @@
 <template>
-    <li class="card px-1 py-3">
+    <li v-show="selectedGenre()" class="card px-1 py-3">
         <a href="#">
             <div class="film-content h-100 position-relative">
                 <div class="img-film m-auto">
@@ -78,6 +78,19 @@ export default{
     methods:{
         findGenre(id){
             return this.storage.genresList.filter(genre => genre.id == id)[0].name;
+        },
+        selectedGenre(){
+            if(this.storage.selectInput != ''){
+                let included = false;
+                for(let i = 0; i < this.filmOrTv.genre_ids.length; i++){
+                    if(this.storage.selectInput == this.filmOrTv.genre_ids[i]){
+                        included = true;
+                    }
+                return included;
+                }
+            } else {
+                return true;
+            }
         }
     }
 }

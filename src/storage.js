@@ -6,6 +6,7 @@ export const storage = reactive (
         base_url: 'https://api.themoviedb.org/3',
         searchInput: '',
         lastSearch: '',
+        selectInput: '',
         lists: {
             filmList: [],
             seriesList: [],

@@ -2,6 +2,8 @@
   <TheHeader @searchFilm="search"/>
   <main class="my-3 container m-auto">
 
+    <h2 v-show="storage.lastSearch != ''" class="text-center">Hai cercato: {{ storage.lastSearch }}</h2>
+
     <!-- 
       SE NON HAI TROVATO NESSUN FILM/SERIE TV E SE LE LISTE NON SONO IN STATO DI 
       CARICAMENTO MOSTRA IL MESSAGGIO ALTRIMENTI MOSTRA GLI ELENCHI DI FILM E SERIE 
@@ -67,12 +69,14 @@ export default{
     SectionComp
   },
   methods: {
-    // SE LA INPUT DI CONTIENE DEI CARATTERI SALVALI IN 'lastSearch', SVUOTA IL
-    // CAMPO DI INPUT ED EFFETTUA DUE CHIAMATE API PER FARTI MANDARE DAL SERVER
-    // LA LISTA DI FILM E SERIE TV CHE ABBIANO TITOLO SIMILE ALLA STRINGA SALVATA
+    //  SE LA INPUT CONTIENE UNA STRINGA CHE NON SUPER I 50 CARATTERI,
+    //  SALVALI IN 'lastSearch' RIMUOVENDO EVENTUALI SPAZI MULTIPLI TRA LE PAROLE
+    //  E SPAZI A INIZIO E FINE STRINGA, SVUOTA IL CAMPO DI INPUT ED EFFETTUA DUE 
+    //  CHIAMATE API PER FARTI MANDARE DAL SERVER LA LISTA DI FILM E SERIE TV CHE 
+    //  ABBIANO TITOLO SIMILE ALLA STRINGA SALVATA
     search() {
-      if(this.storage.searchInput.trim() != ''){
-        this.storage.lastSearch = this.storage.searchInput;
+      if(this.storage.searchInput.replace(/\s\s+/g, ' ').trim() != '' && this.storage.searchInput.replace(/\s\s+/g, ' ').trim().length < 50){
+        this.storage.lastSearch = this.storage.searchInput.replace(/\s\s+/g, ' ').trim();
         this.storage.searchInput = '';
         this.storage.uiMessage = 'Non è stato trovato nessun risultato, prova a cercare un altro titolo';
         this.getListFromApi('filmList', 'loadingFilm', '/search/movie', {
@@ -86,7 +90,7 @@ export default{
           query: this.storage.lastSearch
         })
       } else {
-        alert('Scrivi qualcosa nel campo di input per poter effettuare una ricerca!');
+        alert('Il campo di input non può contenere solo spazi e deve contenere un massimo di 50 caratteri');
       }
     },
     //  EFFETTUA UNA CHIAMATA DI TIPO GET CON I PARAMETRI RICEVUTI IN INGRESSO E 
@@ -139,10 +143,13 @@ export default{
         params: parameters
       })
       .then (response => {
+        //  PER OGNI GENERE PRESENTE NELLA LISTA RICEVUTA CONTROLLO SE IL SUO ID ESISTE ALL'INTERNO
+        //  DELLA LISTA SALVATA IN storage.genresList E SE MANCA LO AGGIUNGO
         response.data.genres.forEach(genre => {
           if(!this.storage.genresList.find(element => element.id == genre.id)){
             this.storage.genresList.push(genre);
           }
+          console.log(this.storage.genresList);
         });
       }).catch(error => {
         console.log(error);

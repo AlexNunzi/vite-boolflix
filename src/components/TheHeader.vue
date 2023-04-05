@@ -3,6 +3,13 @@
         <div class="container d-flex justify-content-between align-center h-100 m-auto">
             <h1>BOOLFLIX</h1>
             <div>
+                <label class="label-select d-block mb-2" for="genreFilter">Filtra in base al genere che stai cercando</label>
+                <select class="select-genre d-block m-auto" v-model="storage.selectInput" name="genreFilter" id="genreFilter">
+                    <option value="">Tutti i generi</option>
+                    <option v-for="genre in storage.genresList" :value="genre.id"> {{ genre.name }} </option>
+                </select>
+            </div>
+            <div>
                 <input class="input-search me-3" type="text" v-model="storage.searchInput" @keyup.enter="$emit('searchFilm')">
                 <button class="search px-2" @click="$emit('searchFilm')">Cerca</button>
             </div>
@@ -68,5 +75,13 @@ header {
 .input-search,
 .search {
     height: 1.5rem;
+}
+
+.label-select{
+    color: $text-label-select;
+}
+
+.select-genre{
+    padding: 2.5px;
 }
 </style>
