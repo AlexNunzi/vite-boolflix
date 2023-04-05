@@ -1,7 +1,10 @@
 <template>
     <header>
         <div class="container d-flex justify-content-between align-center h-100 m-auto">
-            <h1>BOOLFLIX</h1>
+            <div class="position-relative logo">
+                <h1>BOOLFLIX</h1>
+                <h1 class="reflected">BOOLFLIX</h1>
+            </div>
             <div>
                 <label class="label-select d-block mb-2" for="genreFilter">Filtra in base al genere che stai cercando</label>
                 <select class="select-genre d-block m-auto" v-model="storage.selectInput" name="genreFilter" id="genreFilter">
@@ -41,8 +44,17 @@ header {
     background-color: $bg-primary;
     height: 5rem;
 
-    & h1 {
-        color: $text-color-header;
+    & .logo{
+    color: $text-color-header;
+    font-size: $header-logo-fs;
+}
+
+    & .reflected{
+        position: absolute;
+        top: 90%;
+        left: 0;
+        transform: rotatex(180deg) translatey(10px);
+        mask-image: linear-gradient(transparent 20%, white 100%);
     }
 }
 
