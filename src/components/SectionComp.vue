@@ -1,14 +1,18 @@
 <template>
       <section>
         <h2 class="mt-3">{{sectionTitle}} {{ sectionSubTitle }}:</h2>
+    <!-- SE LA CHIAMATA GET DEVE ANCORA RICEVERE RISPOSTA SIMULA CARICAMENTO-->
         <loadingComp v-if="loadingContent" />
+    <!-- ALTRIMENTI MOSTRA IL CONTENUTO -->
         <div v-else>
+        <!-- SE LA LA LISTA CONTIENE QUALCOSA AL SUO INTERNO MOSTRA LA LISTA -->
           <ul v-if="contentList.length > 0" class="bottom-line list-style-none d-flex overflow-x-auto overflow-y-hidden m-auto p-3">
             <CardFilmSerie class="card-container" v-for="film in contentList"
             :filmOrTv="film"
             :load="loadingContent"
             />
           </ul>
+        <!-- ALTRIMENTI MOSTRA MESSAGGIO UTENTE -->
           <h3 v-else class="bottom-line pb-3">Non è stato possibile trovare {{ sectionTitle.toLowerCase() }} che contengono "{{ storage.lastSearch }}" nel proprio titolo</h3>
         </div>
       </section>
@@ -33,7 +37,7 @@ export default {
         sectionTitle: String,
         sectionSubTitle: String,
         loadingContent: Boolean,
-        contentList: Object
+        contentList: Array,
     }
 }
 </script>

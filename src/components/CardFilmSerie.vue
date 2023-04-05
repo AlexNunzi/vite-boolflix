@@ -3,7 +3,9 @@
         <a href="#">
             <div class="film-content h-100 position-relative">
                 <div class="img-film m-auto">
+                <!-- SE LA CHIAVE poster_path CONTIENE UN VALORE RENDERIZZA L'IMMAGINE CORRISPONDENTE -->
                     <img v-if="filmOrTv.poster_path != null" class="card-img" :src="`https://image.tmdb.org/t/p/w342/${filmOrTv.poster_path}`" alt="Film cover image">
+                <!-- ALTRIMENTI IMMAGINE PLACEHOLDER -->
                     <div v-else class="position-relative">
                         <img src="/img_miss.png" alt="Image not available" class="card-img">
                         <h4 class="missingImg label p-3"> {{ filmOrTv.title ? filmOrTv.title : filmOrTv.name }} </h4>
@@ -23,7 +25,11 @@
                     </li>
                     <li class="my-2">
                         <h5>Lingua originale: 
+                        
+                        <!-- SE IN flagImg ESISTE UNA CHIAVE UGUALE A original_language DELL'OGGETTO FILM RENDERIZZA  -->
+                        <!-- LA BANDIERA CORRISPONDENTE -->
                             <img class="flag" v-if="storage.flagImg[filmOrTv.original_language]" :src="storage.flagImg[filmOrTv.original_language]">
+                        <!-- ALTRIMENTI MOSTRA LA SIGLA DELLA LINGUA -->
                             <span v-else>{{ filmOrTv.original_language }}</span>
                         </h5>
                     </li>
@@ -33,6 +39,7 @@
                     <li class="my-2">
                         <h5>Cast</h5>
                         <ul v-if="filmOrTv.castInfo" class="list-style-none">
+                        <!-- STAMPA OGNI NOME PRESENTE ALLA KEY castInfo DI filmOrTv -->
                             <li v-for="char in filmOrTv.castInfo.cast" class="fs-small"> 
                                 {{ char.name }} 
                             </li>
@@ -41,6 +48,7 @@
                     <li class="my-2">
                         <h5>Generi associati</h5>
                         <ul class="list-style-none fs-small">
+                        <!-- STAMPA OGNI GENERE PRESENTE ALLA KEY genre_ids CODIFICANDONE IL VALORE TRAMITE LA FUNZIONE findGenre(id) -->
                             <li v-for="genre in filmOrTv.genre_ids"> {{ findGenre(genre) }} </li>
                         </ul>
                     </li>

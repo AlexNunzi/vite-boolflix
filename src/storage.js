@@ -2,13 +2,17 @@ import { reactive } from "vue";
 
 export const storage = reactive (
     {
+        api_key: 'cf09febcc95a3fe86961147afc012909',
+        base_url: 'https://api.themoviedb.org/3',
         searchInput: '',
         lastSearch: '',
-        filmList: [],
-        seriesList: [],
+        lists: {
+            filmList: [],
+            seriesList: [],
+            recommendedFilmList: [],
+            recommendedSeriesList: [],
+        },
         genresList: [],
-        recommendedFilmList: [],
-        recommendedSeriesList: [],
         flagImg: {
             it: 'it_flag.png',
             en: 'en_flag.png',
@@ -17,9 +21,11 @@ export const storage = reactive (
             fr: 'fr_flag.png',
         },
         uiMessage: 'Qui sotto trovi i film e le serie tv consigliate della settimana, altrimenti effettua una ricerca!',
-        loadingFilm: false,
-        loadingTvShow: false,
-        loadingRecommFilmList: false,
-        loadingRecommSeriesList: false
+        loadings: {
+            loadingFilm: false,
+            loadingTvShow: false,
+            loadingRecommFilmList: false,
+            loadingRecommSeriesList: false
+        }
     }
 )

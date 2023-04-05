@@ -23,6 +23,12 @@ export default {
         voteStars: Number,
     },
     methods: {
+        //  FUNZIONE CHE ESEGUE IL PUSH DELLA STRINGA "width: n%" PER 5 VOLTE. IL VALORE DI n
+        //  RISULTA PARI A 100 FINTANTO CHE voto >= 0 E A OGNI CONTROLLO VIENE SOTTRATTO 1 A voto,
+        //  APPENA LA CONDIZIONE SMETTE DI ESSERE VERA n PRENDE IL VALORE DI voto * 100 SIMULANDO 
+        //  UNA PERCENTUALE ED IL VALORE DI VOTO VIENE AZZERATO PER FARE IN MODO CHE LE WIDTH SUCCESSIVE
+        //  RISULTINO "width: 0%". QUESTI VALORI SERVIRANNO A RENDERIZZARE LA LARGHEZZA DELLE STELLE
+        //  CHE GESTISCONO GRAFICAMENTE IL RATING DI FILM/SERIE TV
         ratingStars(){
             this.stars = [];
             let vote= this.voteStars;
@@ -39,6 +45,7 @@ export default {
             }
         }
     },
+    //  ESEGUI LA FUNZIONE ratingStars() APPENA IL COMPONENT VIENE CREATO
     created() {
         this.ratingStars();
     }
