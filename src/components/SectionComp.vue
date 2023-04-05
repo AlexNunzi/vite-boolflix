@@ -1,6 +1,6 @@
 <template>
       <section>
-        <h2 class="mt-3">{{sectionTitle}} {{ sectionSubTitle }}:</h2>
+        <h2 class="mt-3 text-white">{{sectionTitle}} {{ sectionSubTitle }}:</h2>
     <!-- SE LA CHIAMATA GET DEVE ANCORA RICEVERE RISPOSTA SIMULA CARICAMENTO-->
         <loadingComp v-if="loadingContent" />
     <!-- ALTRIMENTI MOSTRA IL CONTENUTO -->

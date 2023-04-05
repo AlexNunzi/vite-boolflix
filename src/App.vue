@@ -2,13 +2,13 @@
   <TheHeader @searchFilm="search"/>
   <main class="my-3 container m-auto">
 
-    <h2 v-show="storage.lastSearch != ''" class="text-center mt-3">Hai cercato: {{ storage.lastSearch }}</h2>
+    <h2 v-show="storage.lastSearch != ''" class="text-center mt-3 text-white">Hai cercato: {{ storage.lastSearch }}</h2>
 
     <!-- 
       SE NON HAI TROVATO NESSUN FILM/SERIE TV E SE LE LISTE NON SONO IN STATO DI 
       CARICAMENTO MOSTRA IL MESSAGGIO ALTRIMENTI MOSTRA GLI ELENCHI DI FILM E SERIE 
     -->
-    <h2 v-if="foundNothing() && !(storage.loadings['loadingFilm'] || storage.loadings['loadingTvShow'])" class="text-center py-5">{{ this.storage.uiMessage }}</h2>
+    <h2 v-if="foundNothing() && !(storage.loadings['loadingFilm'] || storage.loadings['loadingTvShow'])" class="text-center py-5 text-white">{{ this.storage.uiMessage }}</h2>
 
 <!-- FILM/TV SHOW SECTION -->
     <div v-else>
@@ -149,7 +149,6 @@ export default{
           if(!this.storage.genresList.find(element => element.id == genre.id)){
             this.storage.genresList.push(genre);
           }
-          console.log(this.storage.genresList);
         });
       }).catch(error => {
         console.log(error);

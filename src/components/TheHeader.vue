@@ -6,14 +6,14 @@
                 <h1 class="reflected">BOOLFLIX</h1>
             </div>
             <div>
-                <label class="label-select d-block mb-2" for="genreFilter">Filtra in base al genere che stai cercando</label>
+                <label class="label-select d-block mb-2 text-white" for="genreFilter">Filtra in base al genere che stai cercando</label>
                 <select class="select-genre d-block m-auto" v-model="storage.selectInput" name="genreFilter" id="genreFilter">
                     <option value="">Tutti i generi</option>
                     <option v-for="genre in storage.genresList" :value="genre.id"> {{ genre.name }} </option>
                 </select>
             </div>
             <div>
-                <input class="input-search me-3" type="text" v-model="storage.searchInput" @keyup.enter="$emit('searchFilm')">
+                <input class="input-search me-3" type="text" placeholder="Cerca un titolo..." v-model="storage.searchInput" @keyup.enter="$emit('searchFilm')">
                 <button class="search px-2" @click="$emit('searchFilm')">Cerca</button>
             </div>
         </div>
@@ -56,6 +56,7 @@ header {
         left: 0;
         transform: rotatex(180deg) translatey(10px);
         mask-image: linear-gradient(transparent 20%, white 100%);
+        -webkit-mask-image: linear-gradient(transparent 20%, white 100%);
     }
 }
 
@@ -81,8 +82,14 @@ header {
 
 .input-search{
     padding-left: 0.25rem;
-    border: none;
-    background-color: lighten($bg-search, 50);
+    background-color: $bg-input;
+    border: 1px solid $border-search;
+    color: $text-color-white;
+    appearance: none;
+
+    &::placeholder{
+        color: #c6c6c6;
+    }
 }
 
 .input-search,
@@ -96,5 +103,6 @@ header {
 
 .select-genre{
     padding: 2.5px;
+    background-color: $bg-color-white;
 }
 </style>
