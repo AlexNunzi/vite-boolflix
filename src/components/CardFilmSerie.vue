@@ -111,6 +111,7 @@ export default{
 
 .missingImg{
     position: absolute;
+    z-index: 11;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
