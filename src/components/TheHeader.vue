@@ -43,6 +43,7 @@ header {
     z-index: 9999;
     background-color: $bg-primary;
     height: 5rem;
+    box-shadow: 0px 4px 10px 0px darken($bg-body, 20);
 
     & .logo{
     color: $text-color-header;

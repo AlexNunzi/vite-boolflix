@@ -2,7 +2,7 @@
   <TheHeader @searchFilm="search"/>
   <main class="my-3 container m-auto">
 
-    <h2 v-show="storage.lastSearch != ''" class="text-center">Hai cercato: {{ storage.lastSearch }}</h2>
+    <h2 v-show="storage.lastSearch != ''" class="text-center mt-3">Hai cercato: {{ storage.lastSearch }}</h2>
 
     <!-- 
       SE NON HAI TROVATO NESSUN FILM/SERIE TV E SE LE LISTE NON SONO IN STATO DI 

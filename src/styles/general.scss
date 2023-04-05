@@ -153,8 +153,16 @@ main{
     list-style: none;
 }
 
+.rounded{
+    border-radius: 8px;
+}
+
 .rounded-circle{
     border-radius: 100%;
+}
+
+.overflow-hidden{
+    overflow: hidden;
 }
 
 .overflow-x-auto{
