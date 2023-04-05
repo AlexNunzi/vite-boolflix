@@ -90,6 +90,10 @@ header {
     &::placeholder{
         color: #c6c6c6;
     }
+
+    &:focus-visible{
+        outline: none;
+    }
 }
 
 .input-search,
