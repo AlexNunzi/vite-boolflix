@@ -27,6 +27,33 @@ export const storage = reactive (
             loadingTvShow: false,
             loadingRecommFilmList: false,
             loadingRecommSeriesList: false
-        }
+        },
+        navbarLinks: [
+            {
+                lable: 'Home',
+                ref: '#home'
+            },
+            {
+                lable: 'Serie TV',
+                ref: '#serieTv'
+            },
+            {
+                lable: 'Film',
+                ref: '#film'
+            },
+            {
+                lable: 'Nuovi e popolari',
+                ref: '#nuoviEPopolari'
+            },
+            {
+                lable: 'La mia lista',
+                ref: '#laMiaLista'
+            },
+            {
+                lable: 'Sfoglia per lingua',
+                ref: '#sfogliaPerLingua'
+            },
+        ],
+        currentPage: 'Home'
     }
 )

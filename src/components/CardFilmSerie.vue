@@ -128,11 +128,16 @@ export default{
     right: 0;
 }
 
+.film-content{
+    border: 1px solid transparent;
+}
+
 .film-content:hover{
     transform: scale(1.15);
     transition: all 1s;
     z-index: 100;
     background-color: $bg-film-content;
+    border: solid 1px $border-card-hover;
 
     & .img-film{
         transition: all 1s;

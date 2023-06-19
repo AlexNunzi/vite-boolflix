@@ -1,22 +1,30 @@
 <template>
     <header>
-        <div class="container d-flex justify-content-between align-center h-100 m-auto">
+        <nav class="container d-flex justify-content-between align-center h-100 m-auto">
             <div class="position-relative logo">
                 <h1>BOOLFLIX</h1>
                 <h1 class="reflected">BOOLFLIX</h1>
             </div>
-            <div>
-                <label class="label-select d-block mb-2 text-white" for="genreFilter">Filtra in base al genere che stai cercando</label>
-                <select class="select-genre d-block m-auto" v-model="storage.selectInput" name="genreFilter" id="genreFilter">
+
+            <ul class="d-flex list-style-none flex-grow-1 ms-3">
+                <li class="nav-link mx-2 position-relative" v-for="link in storage.navbarLinks" :class="storage.currentPage == link.lable ? 'selected-nav' : ''" @click="selectPage(link.lable)">
+                    <a class="text-decoration-none text-white" :href="link.ref">{{ link.lable }}</a>
+                </li>
+            </ul>
+
+            <div class="d-flex">
+                <!-- <label class="label-select me-3 text-white" for="genreFilter">Genere:</label> -->
+                <select class="select-genre m-auto" v-model="storage.selectInput" name="genreFilter" id="genreFilter">
                     <option value="">Tutti i generi</option>
                     <option v-for="genre in storage.genresList" :value="genre.id"> {{ genre.name }} </option>
                 </select>
+
+                <input class="input-search" type="text" placeholder="Cerca un titolo..." v-model="storage.searchInput" @keyup.enter="$emit('searchFilm')">
+                <span class="search px-2 d-flex align-center" @click="$emit('searchFilm')">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </span>
             </div>
-            <div>
-                <input class="input-search me-3" type="text" placeholder="Cerca un titolo..." v-model="storage.searchInput" @keyup.enter="$emit('searchFilm')">
-                <button class="search px-2" @click="$emit('searchFilm')">Cerca</button>
-            </div>
-        </div>
+        </nav>
     </header>
 </template>
 
@@ -27,6 +35,11 @@ export default{
     data() {
         return {
             storage,
+        }
+    },
+    methods: {
+        selectPage(lable) {
+            this.storage.currentPage = lable;
         }
     }
 }
@@ -62,9 +75,10 @@ header {
 
 .search{
     border: none;
-    border-radius: 0.5rem;
+    border-radius: 0 0.5rem 1rem 0;
     background-color: $bg-search;
     color: lighten($bg-search, 80);
+    border: 1px solid $border-search;
 
     &:hover{
         cursor: pointer;
@@ -97,7 +111,8 @@ header {
 }
 
 .input-search,
-.search {
+.search,
+.select-genre {
     height: 1.5rem;
 }
 
@@ -107,6 +122,30 @@ header {
 
 .select-genre{
     padding: 2.5px;
-    background-color: $bg-color-white;
+    background-color: $bg-input;
+    color: $text-color-white;
+    border-radius: 1rem 0 0 0.5rem;
+}
+
+.selected-nav::after{
+    content: '';
+    width: 50%;
+    height: 2px;
+    background-color: $text-color-header;
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translatex(-50%);
+}
+
+.nav-link:hover::after{
+    content: '';
+    width: 50%;
+    height: 2px;
+    background-color: darken($text-color-header, 20);
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translatex(-50%);
 }
 </style>

@@ -6,8 +6,8 @@
     <!-- ALTRIMENTI MOSTRA IL CONTENUTO -->
         <div v-else>
         <!-- SE LA LA LISTA CONTIENE QUALCOSA AL SUO INTERNO MOSTRA LA LISTA -->
-          <ul v-if="contentList.length > 0" class="bottom-line list-style-none d-flex overflow-x-auto overflow-y-hidden m-auto p-3">
-            <CardFilmSerie class="card-container" v-for="film in contentList"
+          <ul v-if="contentList.length > 0" class="card-container bottom-line list-style-none d-flex overflow-x-auto overflow-y-hidden m-auto p-3">
+            <CardFilmSerie v-for="film in contentList"
             :filmOrTv="film"
             :load="loadingContent"
             />
@@ -47,4 +47,15 @@ export default {
 .bottom-line{
     border-bottom: 2px solid lighten($bg-body, 20);
 }
+
+.card-container{
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+} 
+
+.card-container::-webkit-scrollbar{
+  display: none;
+} 
+
+
 </style>
